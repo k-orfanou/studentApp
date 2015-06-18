@@ -48,50 +48,32 @@
     <p>
       <div id="accordion">
 
-        <h3>First header</h3>
-        <div>First content panel</div>
+        <h3>First Semester</h3>
+        <div>18/20</div>
 
-        <h3>Second header</h3>
-        <div>Second content panel</div>
+        <h3>Second Semester</h3>
+        <div>19/20</div>
 
       </div>
     </p>
   </div>
   <div id="tabs-5" data-type="settings">
-    <p>
-      InEdu WebAPI endpoint :  
-      <input id = "webApiEndpoint" value="" size="40"/>
-      <br/>   <!-- http://localhost:51147 -->
-      InEdu WebAPI portal-type :  
-      <input id = "webApiPortal" value=""/>
-      <br/> 
-      InEdu WebAPI sis-company :  
-      <input id = "webApiCompany" value=""/>
-      <br/>
-      InEdu WebAPI password :
-      <input id = "webApiPass" value="" size="10"/>
-      <button type = "button" id = "checkWebApi" /> Connect </button>
-      <br/>
-      <div id = "webApiDiv">  </div>
-      <!-- Organization name:   
-      <input id = "organizationName" value="elix"/>   
-      <br/>
-      Organization client Id:
-      <input id = "clientId" value=""/>
-      <br/>
-      Speesis API endpoint:
-      <input id = "apiEndpoint" value="" size="40"/>
-      <button type = "button" id = "checkApi" /> Check endpoint </button>
-      <div id = "apiDiv">  </div> -->
-    </p>
+    <table cellpadding="10">
+      <tr><th colspan="2">InEdu WebAPI</th></tr>
+      <tr><td>Endpoint :</td><td><input id = "webApiEndpoint" value="" size="40"/></td></tr>
+      <tr><td>Portal-Type :</td><td><input id = "webApiPortal" value=""/></td></tr>
+      <tr><td>SiS-Company :</td><td><input id = "webApiCompany" value=""/></td></tr>
+      <tr><td>Password :</td><td><input id = "webApiPass" value="" size="10"/></td></tr>
+      <tr><td><button type = "button" id = "editWebApiCred" /> Edit </button></td><td><button type = "button" id = "checkWebApi" /> Connect </button></td></tr>
+      <tr><td colspan="2"><div id = "webApiDiv">  </div></td>
+    </table>
   </div>
 </div>
 
 <script>
   
   //global variables
-  var webApiEndpoint, webApiPass, webApiPortal, webApiCompany, logingEndpoint, timetableDataEndPointTemplate, routeDataEndPointTemplate;
-  //var apiEndpoint, speesisHealthEndpoint, clearCachedConnectionEndpoint;
+  var webApiEndpoint, webApiPass, webApiPortal, webApiCompany, logingEndpoint, timetableDataEndPointTemplate, activityEndPointTemplate, routeDataEndPointTemplate;
   // data returned by web api login
   var data = null;
   // user's (student) GUID
@@ -114,23 +96,27 @@
           }
       }
     );
+    //example accordion for grades
     $("#accordion").accordion();
   });
 
+  // Edit credentials for web api clicked
+  $("#editWebApiCred").click(function () {
+    $("#webApiDiv").html(" ");
+    updateEndPoints();
+    enableWebApiInputs();
+  });
+
+  // Connect to web api clicked
   $("#checkWebApi").click(function () {
-    updateEndPoints();  
-    $("#webApiDiv").html(" ");  
+    updateEndPoints();
+    $("#webApiDiv").html(" ");
+    disableWebApiInputs();
     loginWebApi();
   });
 
-  /*
-  $("#checkApi").click(function () {
-    updateEndPoints();  
-    $("#apiDiv").html(" ");
-    speesisGet(speesisHealthEndpoint, "", apiFound, apiNotFound);
-  });
-  */
-
+  // new tab selected
+  // check what to do
   function checkTabAction(dataType) {
     switch(dataType){
       case "timeTable":
@@ -139,9 +125,11 @@
         break;
       case "activity":
         console.log("activity");
+        getActivities(userGuid, webApiToken);
         break;
       case "routeTable":
         console.log("routeTable");
+        getRouteTimetable(userGuid, webApiToken);
         break;
       case "grades":
         console.log("grades");
@@ -154,6 +142,7 @@
     }
   }
 
+  // endpoints
   function updateEndPoints() {    
     webApiEndpoint = $("#webApiEndpoint").val();  
     webApiPass = $("#webApiPass").val();
@@ -163,13 +152,29 @@
     logingEndpoint = webApiEndpoint + "/api/account/login";
     timetableEndPointTemplate = webApiEndpoint + "/api/TimeTable/GetTimeTableHours?studentid={{userGuid}}";
     routeEndPointTemplate = webApiEndpoint + "/api/RouteTimeTable/GetRouteTimeTable?studentid={{userGuid}}";
-    //apiEndpoint = $("#apiEndpoint").val();
-    //var org = $("#organizationName").val();
-    //var clientId = $("#clientId").val();
-    //speesisHealthEndpoint = apiEndpoint + "/api/health";
-    //clearCachedConnectionEndpoint = apiEndpoint + "/api/health/" + org + "/clear/" + clientId;
+    activityEndPointTemplate = webApiEndpoint + "/api/StudentActivity/GetStudentActivitiesParentPortal?studentid={{userGuid}}";
   }
 
+  // enable inputs in web api connection form
+  function enableWebApiInputs(){
+    $("#webApiEndpoint").prop("disabled",false);
+    $("#webApiPass").prop("disabled",false);
+    $("#webApiPortal").prop("disabled",false);
+    $("#webApiCompany").prop("disabled",false);
+    $("#checkWebApi").prop("disabled", false);
+  }
+
+  // disable inputs in web api connection form
+  function disableWebApiInputs(){
+    $("#webApiEndpoint").prop("disabled",true);
+    $("#webApiPass").prop("disabled",true);
+    $("#webApiPortal").prop("disabled",true);
+    $("#webApiCompany").prop("disabled",true);
+    $("#checkWebApi").prop("disabled", true);
+  }
+
+
+  //region Login
   function loginWebApi() {
     $.ajax({
       type : "POST",
@@ -191,15 +196,17 @@
     webApiToken = data.token;
     //userGuid = data.userguid;
     userGuid = "87299cd7-f105-e511-8101-c4346bacde44";
-    $("#webApiDiv").html("<i>OK</i>"); 
     console.log("OK. " + webApiToken);
+    $("#webApiDiv").html("<i>Connected</i>");
   }
 
   function webApiNotFound(data) {    
     $("#webApiDiv").html("<i>fail</i>");        
     console.log("fail");
   }
+  //endregion
 
+  //region Timetable
   function getTimetable(studentGuid, token){
     var endpoint = renderTemplate(timetableEndPointTemplate, {userGuid:studentGuid});
     $.ajax({
@@ -226,7 +233,38 @@
     console.log("timeTableFail");
     $("#tabs-1").html("<i>Timetable Not found.</i>")
   }
+  //endregion
 
+  //region Activities
+  function getActivities(studentGuid, token){
+    var endpoint = renderTemplate(activityEndPointTemplate, {userGuid:studentGuid});
+    $.ajax({
+      type : "GET",
+      async : true,
+      url : endpoint,
+      contentType : "application/json",
+      success : activitiesSuccess,
+      error : activitiesFail,
+      beforeSend : function (xhr) {
+        xhr.setRequestHeader("Authorization-token", token);
+        xhr.setRequestHeader("portal-type", webApiPortal);
+        xhr.setRequestHeader("sis-company", webApiCompany);
+      }
+    });
+  }
+
+  function activitiesSuccess(routeTableData){
+    console.log(routeTableData);
+    $("#tabs-2").html("<i>Activities OK. Check console.</i>")
+  }
+
+  function activitiesFail(){
+    console.log("routeTableFail");
+    $("#tabs-2").html("<i>Activities Not found.</i>")
+  }
+  //endregion
+
+  //region Routes Timetable
   function getRouteTimetable(studentGuid, token){
     var endpoint = renderTemplate(routeEndPointTemplate, {userGuid:studentGuid});
     $.ajax({
@@ -246,52 +284,16 @@
 
   function routeTableSuccess(routeTableData){
     console.log(routeTableData);
-    $("#tabs-2").html("<i>Route Timetable OK. Check console.</i>")
+    $("#tabs-3").html("<i>Route Timetable OK. Check console.</i>")
   }
 
   function routeTableFail(){
     console.log("routeTableFail");
-    $("#tabs-2").html("<i>Route Timetable Not found.</i>")
+    $("#tabs-3").html("<i>Route Timetable Not found.</i>")
   }
+  //endregion
 
-  /*
-  function apiFound (data) { $("#apiDiv").html("<i>Endpoint Health is OK</i>");}
-  function apiNotFound() { $("#apiDiv").html("<b>Endpoint Not Found</b>");}
-
-  function speesisPost(endpoint, dataObj, postOK, postFail) {
-    $.ajax({
-      url : endpoint + randomParam(),
-      method : 'POST',
-      data : JSON.stringify(dataObj),
-      contentType : 'application/json',
-      success : postOK,
-      error : postFail,
-      beforeSend : function (xhr) {
-        xhr.setRequestHeader("portal-type", "speesis");
-        xhr.setRequestHeader("sis-company", "inedu");
-      }
-    });
-  }
-    
-  function speesisGet(endpoint, command, postOK, postFail) {
-    $.ajax({
-      url : endpoint + command + randomParam(),
-      method : 'GET',
-      contentType : 'application/json',     
-      success : postOK,
-      error : postFail,
-      beforeSend : function (xhr) {
-        xhr.setRequestHeader("portal-type", "speesis");
-        xhr.setRequestHeader("sis-company", "inedu");
-      }
-    });
-  }
-
-  function randomParam() {
-    return "?rand=" + Math.round(Math.random()*10000);
-  }
-  */
-
+  //region helper functions
   function renderTemplate(template, obj) {  
     var keysToFind = [], rendered = template;
     var regex = new RegExp("{{(.*?)}}", "g");
@@ -315,6 +317,8 @@
   function say(what) {
     console.log(what);
   }
+  //endregion
+
 </script>
 
 </body>
