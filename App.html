@@ -6,18 +6,10 @@
   <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
   <script src="//code.jquery.com/jquery-1.10.2.js"></script>
   <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-
-  <script>
-  
-  var activitiesJson = [{"GradingPeriod":"A Semester","GradingPeriodOrder":1,"ListActivities":[{"StudentId":"87299cd7-f105-e511-8101-c4346bacde44","SchoolActivityId":"69ab8ae3-3909-e511-8105-c4346bad50e4","SchoolActivity":"museum of antiquities","GradingPeriodId":"65054e43-971f-e311-be25-d4856451dc79","GradingPeriod":"A Semester","Grade":"","UpdaterFlag":0,"ActivityDate":"06/04/2015","ActivityDateTo":"06/04/2015","Comments":"We are going to visit the museum of antiquities","Student":"HENDRIX, NICOLE","GradingPeriodOrder":1,"Guid":"7f536203-870a-e511-810c-c4346bacde44","Description":null}]},{"GradingPeriod":"B Semester","GradingPeriodOrder":2,"ListActivities":[{"StudentId":"87299cd7-f105-e511-8101-c4346bacde44","SchoolActivityId":"a741b8b0-3909-e511-8105-c4346bad50e4","SchoolActivity":"Excursion to the Park","GradingPeriodId":"d0594d49-971f-e311-be25-d4856451dc79","GradingPeriod":"B Semester","Grade":"","UpdaterFlag":0,"ActivityDate":"11/05/2015","ActivityDateTo":"12/05/2015","Comments":"We are going to visit the National Park","Student":"HENDRIX, NICOLE","GradingPeriodOrder":2,"Guid":"14c32613-870a-e511-810c-c4346bacde44","Description":null},{"StudentId":"87299cd7-f105-e511-8101-c4346bacde44","SchoolActivityId":"ae7ec6da-860a-e511-8110-c4346bad50e4","SchoolActivity":"tennis lessons","GradingPeriodId":"d0594d49-971f-e311-be25-d4856451dc79","GradingPeriod":"B Semester","Grade":"","UpdaterFlag":0,"ActivityDate":"","ActivityDateTo":"","Comments":"Free Tennis Lessons for all the students","Student":"HENDRIX, NICOLE","GradingPeriodOrder":2,"Guid":"06846124-870a-e511-810c-c4346bacde44","Description":null}]}];
-
-  var timeTableJson = [{"Course":"Chemistry","Teacher":"Kontonikas, Haris","Hour":null,"HourNumber":5,"Day":"Δευτέρα","DayNumber":1,"Room":"","Classroom":"High School - B - 1"},{"Course":"Chemistry","Teacher":"AXESON, WILLIAM","Hour":null,"HourNumber":3,"Day":"Δευτέρα","DayNumber":1,"Room":"","Classroom":"High School - B - 1"},{"Course":"Mathematics","Teacher":"JOHN, RAGKAVAS","Hour":null,"HourNumber":1,"Day":"Δευτέρα","DayNumber":1,"Room":"","Classroom":"High School - B - 1"},{"Course":"Mathematics","Teacher":"Kontonikas, Haris","Hour":null,"HourNumber":2,"Day":"Δευτέρα","DayNumber":1,"Room":"","Classroom":"High School - B - 1"},{"Course":"Algebra","Teacher":"JOHN, RAGKAVAS","Hour":null,"HourNumber":6,"Day":"Δευτέρα","DayNumber":1,"Room":"","Classroom":"High School - B - 1"},{"Course":"Gymnastics","Teacher":"WILLIAMS, JOSEPH","Hour":null,"HourNumber":4,"Day":"Δευτέρα","DayNumber":1,"Room":"","Classroom":"High School - B - 1"},{"Course":"Chemistry","Teacher":"Kontonikas, Haris","Hour":null,"HourNumber":5,"Day":"Τρίτη","DayNumber":2,"Room":"","Classroom":"High School - B - 1"},{"Course":"Mathematics","Teacher":"Kontonikas, Haris","Hour":null,"HourNumber":1,"Day":"Τρίτη","DayNumber":2,"Room":"","Classroom":"High School - B - 1"},{"Course":"Algebra","Teacher":"JOHN, RAGKAVAS","Hour":null,"HourNumber":3,"Day":"Τρίτη","DayNumber":2,"Room":"","Classroom":"High School - B - 1"},{"Course":"Social Studies","Teacher":"AXESON, WILLIAM","Hour":null,"HourNumber":6,"Day":"Τρίτη","DayNumber":2,"Room":"","Classroom":"High School - B - 1"},{"Course":"Ancient Greek","Teacher":"AXESON, WILLIAM","Hour":null,"HourNumber":2,"Day":"Τρίτη","DayNumber":2,"Room":"","Classroom":"High School - B - 1"},{"Course":"Gymnastics","Teacher":"WILLIAMS, JOSEPH","Hour":null,"HourNumber":4,"Day":"Τρίτη","DayNumber":2,"Room":"","Classroom":"High School - B - 1"},{"Course":"Physics","Teacher":"SIDERIDIS, ISIDOROS","Hour":null,"HourNumber":5,"Day":"Τετάρτη","DayNumber":3,"Room":"","Classroom":"High School - B - 1"},{"Course":"Mathematics","Teacher":"JOHN, RAGKAVAS","Hour":null,"HourNumber":6,"Day":"Τετάρτη","DayNumber":3,"Room":"","Classroom":"High School - B - 1"},{"Course":"History","Teacher":"Kontonikas, Haris","Hour":null,"HourNumber":2,"Day":"Τετάρτη","DayNumber":3,"Room":"","Classroom":"High School - B - 1"},{"Course":"Algebra","Teacher":"Kontonikas, Haris","Hour":null,"HourNumber":1,"Day":"Τετάρτη","DayNumber":3,"Room":"","Classroom":"High School - B - 1"},{"Course":"Social Studies","Teacher":"AXESON, WILLIAM","Hour":null,"HourNumber":4,"Day":"Τετάρτη","DayNumber":3,"Room":"","Classroom":"High School - B - 1"},{"Course":"Ancient Greek","Teacher":"WILLIAMS, JOSEPH","Hour":null,"HourNumber":3,"Day":"Τετάρτη","DayNumber":3,"Room":"","Classroom":"High School - B - 1"},{"Course":"Chemistry","Teacher":"AXESON, WILLIAM","Hour":null,"HourNumber":3,"Day":"Πέμπτη","DayNumber":4,"Room":"","Classroom":"High School - B - 1"},{"Course":"Mathematics","Teacher":"Kontonikas, Haris","Hour":null,"HourNumber":6,"Day":"Πέμπτη","DayNumber":4,"Room":"","Classroom":"High School - B - 1"},{"Course":"History","Teacher":"WILLIAMS, JOSEPH","Hour":null,"HourNumber":5,"Day":"Πέμπτη","DayNumber":4,"Room":"","Classroom":"High School - B - 1"},{"Course":"Algebra","Teacher":"Kontonikas, Haris","Hour":null,"HourNumber":1,"Day":"Πέμπτη","DayNumber":4,"Room":"","Classroom":"High School - B - 1"},{"Course":"English","Teacher":"SIDERIDIS, ISIDOROS","Hour":null,"HourNumber":4,"Day":"Πέμπτη","DayNumber":4,"Room":"","Classroom":"High School - B - 1"},{"Course":"Ancient Greek","Teacher":"JOHN, RAGKAVAS","Hour":null,"HourNumber":2,"Day":"Πέμπτη","DayNumber":4,"Room":"","Classroom":"High School - B - 1"},{"Course":"Chemistry","Teacher":"JOHN, RAGKAVAS","Hour":null,"HourNumber":3,"Day":"Παρασκευή","DayNumber":5,"Room":"","Classroom":"High School - B - 1"},{"Course":"Mathematics","Teacher":"Kontonikas, Haris","Hour":null,"HourNumber":6,"Day":"Παρασκευή","DayNumber":5,"Room":"","Classroom":"High School - B - 1"},{"Course":"History","Teacher":"WILLIAMS, JOSEPH","Hour":null,"HourNumber":5,"Day":"Παρασκευή","DayNumber":5,"Room":"","Classroom":"High School - B - 1"},{"Course":"Algebra","Teacher":"Kontonikas, Haris","Hour":null,"HourNumber":1,"Day":"Παρασκευή","DayNumber":5,"Room":"","Classroom":"High School - B - 1"},{"Course":"German","Teacher":"SIDERIDIS, ISIDOROS","Hour":null,"HourNumber":4,"Day":"Παρασκευή","DayNumber":5,"Room":"","Classroom":"High School - B - 1"},{"Course":"Ancient Greek","Teacher":"AXESON, WILLIAM","Hour":null,"HourNumber":2,"Day":"Παρασκευή","DayNumber":5,"Room":"","Classroom":"High School - B - 1"}];
-
-  var routesJson = [{"RouteTimeTableDelivery":[{"CirculationNumber":"W238WKP","Time":"14:30","Driver":"Page, Jimmy","TelephoneNumber":"011-44-1234567891","Escort":"Gomez, Jimena","Address":"145-147 Oxford St, London","RouteType":"Παράδοση","RouteTypeId":500890000,"WeekDay":"1","RegularType":"True","RouteDate":"","AddressTypeId":500890001,"IsPickUp":"False","Guid":null,"Description":null}],"RouteTimeTablePickUp":[{"CirculationNumber":"Y659WER","Time":"8:00","Driver":"Vader, Eddie","TelephoneNumber":"011-44-9587643215","Escort":"Gomez, Jimena","Address":"145-147 Oxford St, London","RouteType":"Παραλαβή","RouteTypeId":500890001,"WeekDay":"1","RegularType":"True","RouteDate":"","AddressTypeId":500890001,"IsPickUp":"True","Guid":null,"Description":null}],"DayId":"1","Guid":null,"Description":null},{"RouteTimeTableDelivery":[{"CirculationNumber":"W238WKP","Time":"14:30","Driver":"Page, Jimmy","TelephoneNumber":"011-44-1234567891","Escort":"Gomez, Jimena","Address":"145-147 Oxford St, London","RouteType":"Παράδοση","RouteTypeId":500890000,"WeekDay":"2","RegularType":"True","RouteDate":"","AddressTypeId":500890001,"IsPickUp":"False","Guid":null,"Description":null}],"RouteTimeTablePickUp":[{"CirculationNumber":"Y659WER","Time":"8:30","Driver":"Vader, Eddie","TelephoneNumber":"011-44-9587643215","Escort":"Hart, Beth","Address":"145-147 Oxford St, London","RouteType":"Παραλαβή","RouteTypeId":500890001,"WeekDay":"2","RegularType":"True","RouteDate":"","AddressTypeId":500890001,"IsPickUp":"True","Guid":null,"Description":null}],"DayId":"2","Guid":null,"Description":null},{"RouteTimeTableDelivery":[{"CirculationNumber":"W238WKP","Time":"14:30","Driver":"Page, Jimmy","TelephoneNumber":"011-44-1234567891","Escort":"Gomez, Jimena","Address":"145-147 Oxford St, London","RouteType":"Παράδοση","RouteTypeId":500890000,"WeekDay":"3","RegularType":"True","RouteDate":"","AddressTypeId":500890001,"IsPickUp":"False","Guid":null,"Description":null}],"RouteTimeTablePickUp":[{"CirculationNumber":"W238WKP","Time":"8:30","Driver":"Page, Jimmy","TelephoneNumber":"011-44-1234567891","Escort":"Gomez, Jimena","Address":"145-147 Oxford St, London","RouteType":"Παραλαβή","RouteTypeId":500890001,"WeekDay":"3","RegularType":"True","RouteDate":"","AddressTypeId":500890001,"IsPickUp":"True","Guid":null,"Description":null}],"DayId":"3","Guid":null,"Description":null},{"RouteTimeTableDelivery":[{"CirculationNumber":"W238WKP","Time":"14:30","Driver":"Page, Jimmy","TelephoneNumber":"011-44-1234567891","Escort":"Gomez, Jimena","Address":"145-147 Oxford St, London","RouteType":"Παράδοση","RouteTypeId":500890000,"WeekDay":"4","RegularType":"True","RouteDate":"","AddressTypeId":500890001,"IsPickUp":"False","Guid":null,"Description":null}],"RouteTimeTablePickUp":[{"CirculationNumber":"Y659WER","Time":"8:30","Driver":"Vader, Eddie","TelephoneNumber":"011-44-9587643215","Escort":"Hart, Beth","Address":"145-147 Oxford St, London","RouteType":"Παραλαβή","RouteTypeId":500890001,"WeekDay":"4","RegularType":"True","RouteDate":"","AddressTypeId":500890001,"IsPickUp":"True","Guid":null,"Description":null}],"DayId":"4","Guid":null,"Description":null},{"RouteTimeTableDelivery":[{"CirculationNumber":"Y659WER","Time":"14:00","Driver":"Vader, Eddie","TelephoneNumber":"011-44-9587643215","Escort":"Hart, Beth","Address":"26 Crawford Street Marylebone, London","RouteType":"Παράδοση","RouteTypeId":500890000,"WeekDay":"5","RegularType":"True","RouteDate":"","AddressTypeId":500890001,"IsPickUp":"False","Guid":null,"Description":null}],"RouteTimeTablePickUp":[{"CirculationNumber":"Y659WER","Time":"8:00","Driver":"Vader, Eddie","TelephoneNumber":"011-44-9587643215","Escort":"Hart, Beth","Address":"26 Crawford Street Marylebone, London","RouteType":"Παραλαβή","RouteTypeId":500890001,"WeekDay":"5","RegularType":"True","RouteDate":"","AddressTypeId":500890001,"IsPickUp":"True","Guid":null,"Description":null}],"DayId":"5","Guid":null,"Description":null}];
-  </script>
 </head>
 <body>
- 
+<h1>Student App</h1>
+<br/>
 <div id="tabs">
   <ul>
     <li><a href="#tabs-1">Courses Timetable</a></li>
@@ -27,35 +19,16 @@
     <li><a href="#tabs-5">Settings</a></li>
   </ul>
   <div id="tabs-1" data-type="timeTable">
-    <table width="100%" cellpadding="10" cellspacing="0" border="10">
-      <tr><th></th><th>Monday</th><th>Tuesday</th><th>Wendesday</th><th>Thursday</th><th>Friday</th></tr>
-      <tr><td>1</td><td>Maths</td><td>Arts</td><td>Grammar</td><td>Gym</td><td>Chemistry</td></tr>
-      <tr><td>2</td><td>Sciences</td><td>Maths</td><td>Sciences</td><td>Grammar</td><td>Chemistry</td></tr>
-      <tr><td>3</td><td>Arts</td><td>Sciences</td><td>Maths</td><td>Sciences</td><td>Arts</td></tr>
-      <tr><td>4</td><td>Grammar</td><td>Gym</td><td>Gym</td><td>Maths</td><td>Chemistry</td></tr>
-      <tr><td>5</td><td>Sciences</td><td>Grammar</td><td>Chemistry</td><td>Arts</td><td>Maths</td></tr>
-      <tr><td>6</td><td>Grammar</td><td>Arts</td><td>Sciences</td><td>Gym</td><td>Sciences</td></tr>
-    </table>
+    <p></p>
   </div>
   <div id="tabs-2" data-type="activity">
-    <p>P2: Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante, ut pharetra massa metus id nunc. Duis scelerisque molestie turpis. Sed fringilla, massa eget luctus malesuada, metus eros molestie lectus, ut tempus eros massa ut dolor. Aenean aliquet fringilla sem. Suspendisse sed ligula in ligula suscipit aliquam. Praesent in eros vestibulum mi adipiscing adipiscing. Morbi facilisis. Curabitur ornare consequat nunc. Aenean vel metus. Ut posuere viverra nulla. Aliquam erat volutpat. Pellentesque convallis. Maecenas feugiat, tellus pellentesque pretium posuere, felis lorem euismod felis, eu ornare leo nisi vel felis. Mauris consectetur tortor et purus.</p>
+    <p></p>
   </div>
   <div id="tabs-3" data-type="routeTable">
-    <p>P3: Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.</p>
-    <p>Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti. Donec mattis, pede vel pharetra blandit, magna ligula faucibus eros, id euismod lacus dolor eget odio. Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit eu tellus interdum rutrum. Maecenas commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.</p>
+    <p></p>
   </div>
   <div id="tabs-4" data-type="grades">
-    <p>
-      <div id="accordion">
-
-        <h3>First Semester</h3>
-        <div>18/20</div>
-
-        <h3>Second Semester</h3>
-        <div>19/20</div>
-
-      </div>
-    </p>
+    <p></p>
   </div>
   <div id="tabs-5" data-type="settings">
     <table cellpadding="10">
@@ -70,34 +43,35 @@
   </div>
 </div>
 
-<script>
-  
+<script>  
   //global variables
-  var webApiEndpoint, webApiPass, webApiPortal, webApiCompany, logingEndpoint, timetableDataEndPointTemplate, activityEndPointTemplate, routeDataEndPointTemplate;
+  var webApiEndpoint, webApiPass, webApiPortal, webApiCompany, logingEndpoint, timetableEndPointTemplate, activityEndPointTemplate, routesEndPointTemplate, gradesEndPointTemplate;
   // data returned by web api login
-  var data = null;
+  //var data = null;
   // user's (student) GUID
   var userGuid = "";
   // returned token
   var webApiToken = "";
   // selected tab
-  var activatedTabId = "";
+  var activatedTabSelector = "";
   var tabDataType = "";
 
   $(function() {
-    $( "#tabs" ).tabs(
+    $("#tabs").tabs(
       {
         active: 4,
-        activate: function(){
-            console.log(arguments);
-            activatedTabSelector = arguments[1].newPanel.selector;
-            tabDataType = $(activatedTabSelector).data("type");
-            checkTabAction(tabDataType);
+        beforeActivate: function(event, ui){
+            activatedTabSelector = ui.newPanel.selector;
+            tabDataType = $(activatedTabSelector).data("type");           
+            if(webApiToken === "" && tabDataType !== "settings") {
+              $(activatedTabSelector).html("<i>Not Connected. Edit App Settings.</i>");
+            } 
+            else {             
+              checkTabAction(tabDataType);
+            }
           }
       }
     );
-    //example accordion for grades
-    $("#accordion").accordion();
   });
 
   // Edit credentials for web api clicked
@@ -133,6 +107,7 @@
         break;
       case "grades":
         console.log("grades");
+        gradesSuccess("example for grades");
         break;
       case "settings":
         console.log("settings");
@@ -142,17 +117,20 @@
     }
   }
 
-  // endpoints
-  function updateEndPoints() {    
-    webApiEndpoint = $("#webApiEndpoint").val();  
+  // InEdu web api endpoints
+  function updateEndPoints() {
+    // web api
+    webApiEndpoint = $("#webApiEndpoint").val();
+    // headers
     webApiPass = $("#webApiPass").val();
     webApiPortal = $("#webApiPortal").val();
     webApiCompany = $("#webApiCompany").val();
-    // InEdu web api
+    // endpoints
     logingEndpoint = webApiEndpoint + "/api/account/login";
     timetableEndPointTemplate = webApiEndpoint + "/api/TimeTable/GetTimeTableHours?studentid={{userGuid}}";
-    routeEndPointTemplate = webApiEndpoint + "/api/RouteTimeTable/GetRouteTimeTable?studentid={{userGuid}}";
+    routesEndPointTemplate = webApiEndpoint + "/api/RouteTimeTable/GetRouteTimeTable?studentid={{userGuid}}";
     activityEndPointTemplate = webApiEndpoint + "/api/StudentActivity/GetStudentActivitiesParentPortal?studentid={{userGuid}}";
+    gradesEndPointTemplate = webApiEndpoint + "/api/";
   }
 
   // enable inputs in web api connection form
@@ -173,7 +151,6 @@
     $("#checkWebApi").prop("disabled", true);
   }
 
-
   //region Login
   function loginWebApi() {
     $.ajax({
@@ -192,17 +169,19 @@
   }
 
   function webApiLoginOK(data) {
-    data = JSON.parse(data);
+    var data = JSON.parse(data);
     webApiToken = data.token;
     //userGuid = data.userguid;
     userGuid = "87299cd7-f105-e511-8101-c4346bacde44";
-    console.log("OK. " + webApiToken);
+    console.log("Connection to InEdu Web Api OK");
     $("#webApiDiv").html("<i>Connected</i>");
   }
 
-  function webApiNotFound(data) {    
-    $("#webApiDiv").html("<i>fail</i>");        
-    console.log("fail");
+  function webApiNotFound(data) {
+    console.log("Connection to InEdu Web Api failed");
+    $("#webApiDiv").html("<i>Connection failed</i>");        
+    webApiToken = "";
+    userGuid = "";
   }
   //endregion
 
@@ -226,12 +205,12 @@
 
   function timeTableSuccess(timeTableData){
     console.log(timeTableData);
-    $("#tabs-1").html("<i>Timetable OK. Check console.</i>")
+    $("#tabs-1").html("<i>Timetable OK. Check console.</i>");
   }
 
   function timeTableFail(){
     console.log("timeTableFail");
-    $("#tabs-1").html("<i>Timetable Not found.</i>")
+    $("#tabs-1").html("<i>Timetable Not found.</i>");
   }
   //endregion
 
@@ -253,20 +232,20 @@
     });
   }
 
-  function activitiesSuccess(routeTableData){
-    console.log(routeTableData);
-    $("#tabs-2").html("<i>Activities OK. Check console.</i>")
+  function activitiesSuccess(activitiesTableData){
+    console.log(activitiesTableData);
+    $("#tabs-2").html("<i>Activities OK. Check console.</i>");
   }
 
   function activitiesFail(){
-    console.log("routeTableFail");
-    $("#tabs-2").html("<i>Activities Not found.</i>")
+    console.log("activitiesFail");
+    $("#tabs-2").html("<i>Activities Not found.</i>");
   }
   //endregion
 
   //region Routes Timetable
   function getRouteTimetable(studentGuid, token){
-    var endpoint = renderTemplate(routeEndPointTemplate, {userGuid:studentGuid});
+    var endpoint = renderTemplate(routesEndPointTemplate, {userGuid:studentGuid});
     $.ajax({
       type : "GET",
       async : true,
@@ -284,12 +263,47 @@
 
   function routeTableSuccess(routeTableData){
     console.log(routeTableData);
-    $("#tabs-3").html("<i>Route Timetable OK. Check console.</i>")
+    $("#tabs-3").html("<i>Routes Timetable OK. Check console.</i>");
   }
 
   function routeTableFail(){
     console.log("routeTableFail");
-    $("#tabs-3").html("<i>Route Timetable Not found.</i>")
+    $("#tabs-3").html("<i>Routes Timetable Not found.</i>");
+  }
+  //endregion
+
+  //region Grades
+  function getGrades(studentGuid, token){
+    var endpoint = renderTemplate(gradesEndPointTemplate, {userGuid:studentGuid});
+    $.ajax({
+      type : "GET",
+      async : true,
+      url : endpoint,
+      contentType : "application/json",
+      success : gradesSuccess,
+      error : gradesFail,
+      beforeSend : function (xhr) {
+        xhr.setRequestHeader("Authorization-token", token);
+        xhr.setRequestHeader("portal-type", webApiPortal);
+        xhr.setRequestHeader("sis-company", webApiCompany);
+      }
+    });
+  }
+
+  function gradesSuccess(gradesData){
+    console.log(gradesData);
+    $("#tabs-4").html("<div id='accordion'><h3>First Semester</h3><div>18/20</div><h3>Second Semester</h3><div>19/20</div></div>");
+      // example accordion for grades
+    $("#accordion").accordion({
+      collapsible: true,
+      active: false,
+      heightStyle: "fill"
+    });
+  }
+
+  function gradesFail(){
+    console.log("gradesFail");
+    $("#tabs-4").html("<i>Grades Not found.</i>");
   }
   //endregion
 
