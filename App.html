@@ -6,7 +6,6 @@
   <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
   <script src="//code.jquery.com/jquery-1.10.2.js"></script>
   <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-  <link rel="stylesheet" href="/resources/demos/style.css">
 
   <script>
   
@@ -219,7 +218,7 @@
   }
 
   function timeTableSuccess(timeTableData){
-    console.log(JSON.parse(timeTableData));
+    console.log(timeTableData);
     $("#tabs-1").html("<i>Timetable OK. Check console.</i>")
   }
 
@@ -246,7 +245,7 @@
   }
 
   function routeTableSuccess(routeTableData){
-    console.log(JSON.parse(routeTableData));
+    console.log(routeTableData);
     $("#tabs-2").html("<i>Route Timetable OK. Check console.</i>")
   }
 
