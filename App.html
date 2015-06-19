@@ -154,7 +154,7 @@
     $("#checkWebApi").prop("disabled", true);
   }
 
-  //region Login
+  //#region Login
   function loginWebApi() {
     $.ajax({
       type : "POST",
@@ -187,9 +187,9 @@
     webApiToken = "";
     userGuid = "";
   }
-  //endregion
+  //#endregion
 
-  //region Get User Guid
+  //#region Get User Guid
   function getStudentGuid(parentGuid, token){
     getChildrenCredentials(parentGuid, token);
     say(childrenData);
@@ -228,9 +228,9 @@
   function childrenFail(){
     childrenData = null;
   }
-  //endregion
+  //#endregion
 
-  //region Timetable
+  //#region Timetable
   function getTimetable(studentGuid, token){
     var endpoint = renderTemplate(timetableEndPointTemplate, {userGuid:studentGuid});
     $.ajax({
@@ -257,9 +257,9 @@
     console.log("timeTableFail");
     $("#tabs-1").html("<i>Timetable Not found.</i>");
   }
-  //endregion
+  //#endregion
 
-  //region Activities
+  //#region Activities
   function getActivities(studentGuid, token){
     var endpoint = renderTemplate(activityEndPointTemplate, {userGuid:studentGuid});
     $.ajax({
@@ -286,9 +286,9 @@
     console.log("activitiesFail");
     $("#tabs-2").html("<i>Activities Not found.</i>");
   }
-  //endregion
+  //#endregion
 
-  //region Routes Timetable
+  //#region Routes Timetable
   function getRouteTimetable(studentGuid, token){
     var endpoint = renderTemplate(routesEndPointTemplate, {userGuid:studentGuid});
     $.ajax({
@@ -315,9 +315,9 @@
     console.log("routeTableFail");
     $("#tabs-3").html("<i>Routes Timetable Not found.</i>");
   }
-  //endregion
+  //#endregion
 
-  //region Grades
+  //#region Grades
   function getGrades(studentGuid, token){
     var endpoint = renderTemplate(gradesEndPointTemplate, {userGuid:studentGuid});
     $.ajax({
@@ -350,9 +350,9 @@
     console.log("gradesFail");
     $("#tabs-4").html("<i>Grades Not found.</i>");
   }
-  //endregion
+  //#endregion
 
-  //region helper functions
+  //#region helper functions
   function renderTemplate(template, obj) {  
     var keysToFind = [], rendered = template;
     var regex = new RegExp("{{(.*?)}}", "g");
@@ -376,7 +376,7 @@
   function say(what) {
     console.log(what);
   }
-  //endregion
+  //#endregion
 
 </script>
 
