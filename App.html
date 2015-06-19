@@ -45,11 +45,13 @@
 
 <script>  
   //global variables
-  var webApiEndpoint, webApiPass, webApiPortal, webApiCompany, logingEndpoint, timetableEndPointTemplate, activityEndPointTemplate, routesEndPointTemplate, gradesEndPointTemplate;
-  // data returned by web api login
-  //var data = null;
+  var webApiEndpoint, webApiPass, webApiPortal, webApiCompany, logingEndpoint, timetableEndPointTemplate, activityEndPointTemplate, routesEndPointTemplate, gradesEndPointTemplate, childrenEndPointTemplate;
+  // data returned by getChildrenCredentials
+  var childrenData = null;
   // user's (student) GUID
   var userGuid = "";
+  // current user
+  var currentUserMail = "s.student@inedulms.com";
   // returned token
   var webApiToken = "";
   // selected tab
@@ -131,6 +133,7 @@
     routesEndPointTemplate = webApiEndpoint + "/api/RouteTimeTable/GetRouteTimeTable?studentid={{userGuid}}";
     activityEndPointTemplate = webApiEndpoint + "/api/StudentActivity/GetStudentActivitiesParentPortal?studentid={{userGuid}}";
     gradesEndPointTemplate = webApiEndpoint + "/api/";
+    childrenEndPointTemplate = webApiEndpoint + "/api/family/GetChildrenCredentials?contactId={{parentGuid}}";
   }
 
   // enable inputs in web api connection form
@@ -171,10 +174,11 @@
   function webApiLoginOK(data) {
     var data = JSON.parse(data);
     webApiToken = data.token;
-    //userGuid = data.userguid;
-    userGuid = "87299cd7-f105-e511-8101-c4346bacde44";
+    var parentGuid = data.userguid;
     console.log("Connection to InEdu Web Api OK");
-    $("#webApiDiv").html("<i>Connected</i>");
+    console.log("Getting student's guid...");
+    $("#webApiDiv").html("<i>Connecting...</i>");
+    getStudentGuid(parentGuid, webApiToken);
   }
 
   function webApiNotFound(data) {
@@ -182,6 +186,47 @@
     $("#webApiDiv").html("<i>Connection failed</i>");        
     webApiToken = "";
     userGuid = "";
+  }
+  //endregion
+
+  //region Get User Guid
+  function getStudentGuid(parentGuid, token){
+    getChildrenCredentials(parentGuid, token);
+    say(childrenData);
+    childrenData.forEach(function(item){
+      if (item.UserName === currentUserMail){
+        userGuid = item.Guid;
+        //userGuid = "87299cd7-f105-e511-8101-c4346bacde44";
+        say(userGuid);
+        return false;
+      }     
+    });
+    $("#webApiDiv").html("<i>Connected</i>");
+  }
+
+  function getChildrenCredentials(contactGuid, token){
+    var endpoint = renderTemplate(childrenEndPointTemplate, {parentGuid:contactGuid});
+    $.ajax({
+      type : "GET",
+      async : false,
+      url : endpoint,
+      contentType : "application/json",
+      success : childrenSuccess,
+      error : childrenFail,
+      beforeSend : function (xhr) {
+        xhr.setRequestHeader("Authorization-token", token);
+        xhr.setRequestHeader("portal-type", webApiPortal);
+        xhr.setRequestHeader("sis-company", webApiCompany);
+      }
+    });   
+  }
+
+  function childrenSuccess(data){
+    childrenData = data;
+  }
+
+  function childrenFail(){
+    childrenData = null;
   }
   //endregion
 
